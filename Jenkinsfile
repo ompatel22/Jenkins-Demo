@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    environment {
+        PATH = "/usr/local/bin:${env.PATH}"  // make docker available
+    }
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'ls -R' // debug to see file paths
+                sh 'ls -R'
             }
         }
         stage('Compile Java') {
