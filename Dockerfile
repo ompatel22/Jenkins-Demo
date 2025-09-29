@@ -1,14 +1,15 @@
-# Step 1: Use official OpenJDK image as base
-FROM openjdk:17-slim
+# Step 1: Use a lightweight JDK base image
+FROM eclipse-temurin:17-jdk-jammy
 
-# Step 2: Set working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Step 3: Copy Java source code to container
-COPY src/Main.java /app
+# Copy the built JAR file from Jenkins workspace to the container
+# Assuming Jenkins pipeline runs './mvnw clean package -DskipTests' beforehand
+COPY target/*.jar app.jar
 
-# Step 4: Compile Java source code
-RUN javac Main.java
+# Expose application port (change if required)
+EXPOSE 8080
 
-# Step 5: Run the program
-CMD ["java", "Main"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
