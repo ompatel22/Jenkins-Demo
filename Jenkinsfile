@@ -1,11 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Build with Maven') {
+        stage('Compile Java') {
             steps {
-                // Use the Maven Wrapper to build the JAR file.
-                // This is a best practice as it doesn't require installing Maven on the Jenkins agent.
-                sh './mvnw clean package -DskipTests'
+                sh 'javac Main.java'
             }
         }
         stage('Build Docker Image') {
