@@ -1,9 +1,15 @@
 pipeline {
     agent any
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                sh 'ls -R' // debug to see file paths
+            }
+        }
         stage('Compile Java') {
             steps {
-                sh 'javac Main.java'
+                sh 'javac src/Main.java'
             }
         }
         stage('Build Docker Image') {

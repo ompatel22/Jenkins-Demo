@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
-COPY Main.java .
+COPY src/ .
 RUN javac Main.java
 CMD ["java", "Main"]
